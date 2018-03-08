@@ -1,0 +1,26 @@
+ mode du fichier. Ce champ regroupe sur 4 bits le type du fichier, et sur 12 bits
+les droits du fichier. Ceux-ci sont définis dans <sys/mode.h>. La vérification de ces bits se fait grâce
+à l'opérateur binaire & (ET bit à bit) avec les constantes suivantes :
+ S_IFREG : fichier régulier (classique)
+ S_IFDIR : fichier répertoire
+ S_IFCHR : fichier spécial mode caractère
+ S_IFBLK : fichier spécial mode bloc
+ S_IFIFO : fichier pipe (first-in, first-out)
+ S_IFLNK : fichier lien symbolique
+ S_IFSOCK : fichier socket
+ S_IFMT : masque symbolique permettant d'isoler les 4 bits correspondants au type du fichier
+ S_ISUID : droits contenant setuid
+ S_ISGID : droits contenant setgid
+ S_ISTICK : droits contenant sticky bit
+ S_IRUSR : droit de lecture pour le propriétaire
+ S_IWUSR : droit d'écriture pour le propriétaire
+ S_IXUSR : droit d'exécution pour le propriétaire
+ S_IRWXU : groupement de lecture, écriture, exécution pour le propriétaire
+ S_IRGRP : droit de lecture pour le groupe
+ S_IWGRP : droit d'écriture pour le groupe
+ S_IXGRP : droit d'exécution pour le groupe
+ S_IRWXG : groupement de lecture, écriture, exécution pour le groupe
+ S_IROTH : droit de lecture pour les autres
+ S_IWOTH : droit d'écriture pour les autres
+ S_IXOTH : droit d'exécution pour les autres
+ S_IRWXO : groupement de lecture, écriture, exécution pour les autres
