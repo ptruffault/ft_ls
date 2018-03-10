@@ -59,6 +59,7 @@ struct s_file
 	char		*path;
 	int 		block;
 	char		*link;
+	int   		total;
 	t_file 		*sdir;
 	t_file 		*next;
 };
@@ -73,6 +74,7 @@ struct	s_list
 void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path);
 t_file	*ft_get_tfile(char *path, int recursive);
 t_file	*ft_search_tfile(char *path, int recursif);
+void	ft_put_tfile(t_file *file);
 t_file	*ft_new_tfile(void);
 void	ft_del_tfile(t_file *file);
 void	ft_free_tfile(t_file *file);

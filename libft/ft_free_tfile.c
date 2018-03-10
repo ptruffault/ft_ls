@@ -2,7 +2,7 @@
 
 void	ft_del_tfile(t_file *file)
 {
-	if ((file->link))
+	if (file->type == 'l' && (file->link))
 		free(file->link);
 	if ((file->name))
 		free(file->name);
@@ -27,10 +27,7 @@ void			ft_free_tfile(t_file *file)
 	{
 		tmp = file->next;
 		if (file->type == 'd' && (file->sdir))
-		{
 			ft_free_tfile(file->sdir);
-			free(file->sdir);
-		}
 		ft_del_tfile(file);
 		file = tmp;
 	}

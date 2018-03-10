@@ -53,13 +53,12 @@ typedef struct		s_opts
 }					t_opts;
 
 int 		get_total(t_file *file);
-void		free_opts(t_opts *opts);
 void		ft_rect(char *str, int tab);
-void 		ft_tabulation(int n);
-void		ft_in_tabulation(char type, int n);
+
 void		ft_print_error(char *error, char *param);
 
 t_opts		get_options(int argc, char **argv);
 t_file		*recursif_sort(t_file *file, t_opts *options);
 void		disp(t_file *file, t_opts *options);
+void		ft_disp_l(t_file *file, t_opts *options);
 #endif

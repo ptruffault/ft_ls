@@ -1,5 +1,34 @@
 #include "../includes/ft_ls.h"
 
+void		ft_disp_l(t_file *file, t_opts *options)
+{
+	char *date;
+
+	ft_putchar(file->type);
+	ft_putstr_color(file->mode, CYAN);
+	ft_putchar(' ');
+	ft_putnbr(file->nb_of_l);
+	ft_putchar(' ');
+	if (options->g == 0)
+	{
+		ft_putstr_color(file->owner, NORMAL);
+		ft_putchar('\t');
+	}
+	ft_putstr_color(file->group, NORMAL);
+	ft_putchar('\t');
+	ft_putnbr(file->size);
+	ft_putchar('\t');
+	if ((options->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))  ||
+		(options->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
+		ft_print_error("ft_ls : allocation failed", NULL);
+	else
+	{
+		ft_putstr_color(date, SOULIGNE);
+		ft_putchar(' ');
+		free(date);
+	}
+}
+
 int		get_total(t_file *file)
 {
 	int total;
@@ -11,20 +40,6 @@ int		get_total(t_file *file)
 		file = file->next;
 	}
 	return(total/2);
-}
-
-void	ft_in_tabulation(char type, int n)
-{
-	char *color_str;
-
-	while (--n > 0)
-		ft_putstr("|  ");
-	if ((type == 'd' && !(color_str = ft_strjoin(VERT ,"|-> ")))
-	||	(type == 'l' && !(color_str = ft_strjoin(MAGENTA ,"|->")))
-	|| ((type != 'd' && type != 'l') && !(color_str = ft_strjoin(NORMAL ,"|-> "))))
-		ft_putstr_color_fd("ft_ls : probléme de gestion des couleurs", MAGENTA, 2);
-	ft_putstr(color_str);
-	free(color_str);
 }
 
 void	ft_print_error(char *error, char *param)
@@ -43,14 +58,4 @@ void	ft_print_error(char *error, char *param)
 	}
 	ft_putchar('\n');
 	exit(-1);
-}
-
-
-void	ft_rect(char *str, int tab)
-{
-	while (--tab > 0)
-		ft_putstr("|  ");
-	ft_putstr_color("|\0", ROUGE);
-	ft_putstr_color(str, SOULIGNE);
-	ft_putchar('\n');
 }

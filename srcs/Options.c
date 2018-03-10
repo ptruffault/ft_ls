@@ -1,12 +1,9 @@
 #include "../includes/ft_ls.h"
 
-static int 		ft_test_opts(char c, t_opts *opts)
+static int 		ft_test_opts_2(char c, t_opts *opts)
 {
-	if (c != 'q' && c != 'l' && c != 'R' && c != 'r' && c != 'a' && c != 't' && c != 'p'
-	 && c != 'd' && c != 'g' && c != 'f' && c != 'u')
-		return (-1);
 	if (c == 'q')
-		opts->tab = 0;
+		opts->tab = 1;
 	if (c == 'l')
 		opts->l = 1;
 	if (c == 'R')
@@ -30,13 +27,19 @@ static int 		ft_test_opts(char c, t_opts *opts)
 	return (0);
 }
 
-static void		init_opts(t_opts *opts, int argc, char **argv)
+static int 		ft_test_opts(char c, t_opts *opts)
 {
-	int i;
-	int j;
+	if (c != 'q' && c != 'l' && c != 'R' && c != 'r' && c != 'a' && c != 't' && c != 'p'
+	 && c != 'd' && c != 'g' && c != 'f' && c != 'u')
+		return (-1);
+	else
+		return(ft_test_opts_2(c, opts));
+}
 
+static void		init_opts_2(t_opts *opts)
+{
 	opts->l = 0;
-	opts->tab = 1;
+	opts->tab = 0;
 	opts->p = 0;
 	opts->g = 0;
 	opts->gr = 0;
@@ -46,6 +49,14 @@ static void		init_opts(t_opts *opts, int argc, char **argv)
 	opts->u = 0;
 	opts->f = 0;
 	opts->t = 0;
+}
+
+static void		init_opts(t_opts *opts, int argc, char **argv)
+{
+	int i;
+	int j;
+
+	init_opts_2(opts);
 	opts->args = NULL;
 	i = 1;
 	j = 0;
@@ -56,21 +67,8 @@ static void		init_opts(t_opts *opts, int argc, char **argv)
 		i++;
 	}
 	opts->nb_of_arg = j;
-	if (!(opts->args = (char **)malloc(sizeof(char *) * j)))
+	if (j != 0 && !(opts->args = (char **)malloc(sizeof(char *) * j)))
 		ft_print_error("ft_ls : allocation failed", NULL);
-}
-
-static void		ft_update_opts(char *argv, t_opts *opts)
-{
-	int j;
-
-	j = 1;
-	while (argv[j] != '\0')
-	{
-		if (ft_test_opts(argv[j], opts) == -1)
-			ft_print_error("ft_ls : invalid option", &argv[j]);
-		j++;
-	}
 }
 
 t_opts			get_options(int argc, char **argv)
@@ -78,6 +76,7 @@ t_opts			get_options(int argc, char **argv)
 	t_opts	opts;
 	int i;
 	int j;
+	int k;
 
 	i = 1;
 	j = 0;
@@ -85,7 +84,15 @@ t_opts			get_options(int argc, char **argv)
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
-			ft_update_opts(argv[i], &opts);
+		{
+			k = 1;
+			while (argv[i][k] != '\0')
+			{
+				if (ft_test_opts(argv[i][k], &opts) == -1)
+					ft_print_error("ft_ls : invalid option", argv[i]);
+				k++;
+			}
+		}
 		else
 			opts.args[j++] = ft_strdup(argv[i]);
 		i++;

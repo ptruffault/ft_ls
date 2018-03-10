@@ -19,28 +19,6 @@ static char		*find_mode(mode_t st_mode)
 	return (str);
 }
 
-static char		*find_group(gid_t st_gid)
-{
-	struct group *grp;
-	char *str;
-
-	grp = NULL;
-	if (!(grp = getgrgid(st_gid)) || !(str = ft_strdup(grp->gr_name)))
-		return (NULL);
-	return (str);
-}
-
-static char		*find_uid(uid_t st_uid)
-{
-	struct passwd *owner;
-	char *str;
-
-	owner = NULL;
-	if (!(owner = getpwuid(st_uid)) || !(str = ft_strdup(owner->pw_name)))
-		return (NULL);
-	return (str);
-}
-
 static	char	find_type(mode_t st_mode)
 {
 	if (S_ISDIR(st_mode) == 1)
@@ -63,14 +41,16 @@ static	char	find_type(mode_t st_mode)
 void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path)
  {
  	struct stat buf;
+ 	struct group *grp;
+ 	struct passwd *owner;
  
  	if ((!(file->name = ft_strdup(t_dir->d_name)))				||
   	!(file->path = ft_new_path(path, file->name))				|| 	
  	(lstat(file->path, &buf) < 0) 								||
  	((file->type = find_type(buf.st_mode)) == '0') 				|| 
-	!(file->owner = find_uid(buf.st_uid)) 						||
-	!(file->group = find_group(buf.st_gid)) 					||
-	!(file->mode = find_mode(buf.st_mode)))
+	(!(owner = getpwuid(buf.st_uid)) || !(file->owner = ft_strdup(owner->pw_name)))		||
+	(!(grp = getgrgid(buf.st_gid)) 	|| !(file->group = ft_strdup(grp->gr_name))					||
+	!(file->mode = find_mode(buf.st_mode))))
  		ft_putendl_fd("Get_file_inf :impossible to take file's informations", 2);;
  	file->modif_time = buf.st_mtime;
  	file->access_time = buf.st_atime;

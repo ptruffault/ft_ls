@@ -75,7 +75,8 @@ SRC = ./ft_memset.c \
 	  ./ft_search_tfile.c \
 	  ./ft_get_prev_path.c \
 	  ./ft_putstr_color_fd.c \
-	  ./ft_sort_tfile.c
+	  ./ft_sort_tfile.c \
+	  ./ft_put_tfile.c
 
 OBJ = $(SRC:.c=.o)
 

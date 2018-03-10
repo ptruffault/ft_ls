@@ -47,6 +47,8 @@ t_file	*ft_get_tfile(char *path, int recursive)
 	save = file;
 	ft_opendir(path, file, recursive);
 	file = save->next;
+	if (!(file->name))
+		return (NULL);
 	free(save);
 	file = ft_sort_tfile(file, NULL);
 	return (file);
