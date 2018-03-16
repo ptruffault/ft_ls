@@ -1,7 +1,5 @@
 NAME = libft.a
 
-CLANG = gcc
-
 SRC = ./ft_memset.c \
 	  ./ft_strncut.c \
 	  ./ft_caps_lock.c \
@@ -89,7 +87,7 @@ FLAG = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME):
-	@$(CLANG) -c $(FLAG) $(SRC) -I .
+	@gcc -c $(FLAG) $(SRC) -I .
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
