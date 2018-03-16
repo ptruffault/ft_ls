@@ -89,6 +89,7 @@ char 	*ft_get_input(void);
 
 
 char	*ft_caps_lock(char *str);
+int		ft_strcmp_castless(char *s1, char *s2);
 void	*ft_realloc(void *ptr, size_t prev_size, size_t new_size);
 
 t_list	*ft_lstnew(const void *content, size_t content_size);
@@ -121,6 +122,8 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
+int		ft_ismaj(char c);
+int		ft_ismin(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

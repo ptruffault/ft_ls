@@ -11,10 +11,7 @@ static void read_all_dir(t_file *file, char *path, DIR *dir, int recursive)
 		ft_get_file_information(file, t_dir, path);
 		if (recursive != 0 && file->type == 'd' && 
 			ft_strcmp(file->name, ".") != 0  && ft_strcmp(file->name, "..") != 0)
-		{
 			file->sdir = ft_get_tfile(file->path, recursive);
-			file->sdir = ft_sort_tfile(file->sdir, NULL);
-		}
 	}
 }
 
@@ -36,7 +33,7 @@ static void	ft_opendir(char *path, t_file *file, int recursive)
 t_file	*ft_get_tfile(char *path, int recursive)
 {
 	t_file *file;
-	t_file *save;
+	t_file *tmp;
 
 	if (!(path))
 	{
@@ -44,12 +41,9 @@ t_file	*ft_get_tfile(char *path, int recursive)
 		return (NULL);
 	}
 	file = ft_new_tfile();
-	save = file;
 	ft_opendir(path, file, recursive);
-	file = save->next;
-	if (!(file->name))
-		return (NULL);
-	free(save);
-	file = ft_sort_tfile(file, NULL);
+	tmp = file->next;
+	free(file);
+	file = tmp;
 	return (file);
 }

@@ -35,6 +35,7 @@ static void		aff(t_file *file, t_opts *options)
 	}
 	ft_putchar('\n');
 }
+
 static void		disp_dir(t_file *file, t_opts *options)
 {
 	int n;
@@ -43,8 +44,7 @@ static void		disp_dir(t_file *file, t_opts *options)
 		if ((file->name) && (options->a == 1 || *file->name != '.')
 		&& (options->gr == 1 && file->type == 'd' && (file->sdir) && (options->tab != 0)))
 		{
-			options->tab++;
-			ft_rect(file->name, options->tab - 1);
+			ft_print_dir_name(file, options);
 			disp(file->sdir, options);
 			n = options->tab;
 			options->tab--;
@@ -72,7 +72,13 @@ void		disp(t_file *file, t_opts *options)
 			{
 				ft_putchar('\n');
 				ft_putstr(file->path);
-				ft_putstr(":\n");
+				ft_putchar(':');
+				if (options->l == 1 || options->g == 1)
+				{
+					ft_putstr("\t\tTotal: ");
+					ft_putnbr(get_total(file->sdir));
+				}
+				ft_putchar('\n');
 				disp(file->sdir, options);
 			}
 			file = file->next;
