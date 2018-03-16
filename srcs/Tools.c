@@ -1,6 +1,6 @@
 #include "../includes/ft_ls.h"
 
-void	ft_disp_l2(t_file *file, t_opts *options)
+static void	ft_disp_l2(t_file *file, t_opts *options)
 {
 	char *date;
 
@@ -50,4 +50,43 @@ void	ft_print_error(char *error, char *param)
 	}
 	ft_putchar('\n');
 	exit(-1);
+}
+
+static t_file *reverse_list(t_file *head)
+{
+    t_file *prev = NULL;
+    t_file *next;
+
+    while (head != NULL) 
+    {
+        next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
+    }
+    return (prev);
+}
+
+t_file	*recursif_sort(t_file *file, t_opts *options)
+{
+	t_file *tmp;
+
+	if (options->t == 1 && options->u == 1)
+		file = ft_sort_tfile(file, &ft_test_u);
+	else if (options->t == 1 && options->u == 0)
+		file = ft_sort_tfile(file, &ft_test_t);
+	else if (options->s == 1)
+		file = ft_sort_tfile(file, &ft_test_s);
+	else if (options->t == 0 && options->u == 0)
+		file = ft_sort_tfile(file, &ft_test_a);
+	if (options->r == 1)
+		file = reverse_list(file);
+	tmp = file;
+	while (tmp)
+	{
+		if (tmp->type == 'd' && (tmp->sdir) && (options->a == 1 || *tmp->name != '.'))
+			tmp->sdir = recursif_sort(tmp->sdir, options);
+		tmp = tmp->next;
+	}
+	return (file);
 }

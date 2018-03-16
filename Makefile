@@ -19,7 +19,7 @@ LIB			= -Llibft/ -lft
 SRC			= srcs/Affichage.c \
 			srcs/main.c \
 			srcs/Options.c \
-			srcs/Sort.c \
+			srcs/Sort_tools.c \
 			srcs/Tools.c \
 			
 CFLAGS		= -Wall -Werror -Wextra
@@ -57,5 +57,17 @@ save: fclean
 	@git add *
 	@git commit -m "make save"
 	@git push
+
+load: fclean
+	@rm -rf srcs
+	@rm -rf includes
+	@rm -rf libft
+	@rm -rf auteur
+	@git clone https://github.com/ptruffault/ft_ls.git
+	@cp -r ft_ls/srcs .
+	@cp -r ft_ls/includes .
+	@cp -r ft_ls/libft .
+	@cp ft_ls/auteur .
+	@rm -rf ft_ls
 
 .PHONY: all small_clean clean fclean re fast_re

@@ -26,6 +26,7 @@ typedef struct		s_opts
 {
 	int				tab;
 	int				l;
+	int 			s;
 	int				a;
 	int				r;
 	int				t;
@@ -41,6 +42,10 @@ typedef struct		s_opts
 
 t_opts		get_options(int argc, char **argv);
 t_file		*recursif_sort(t_file *file, t_opts *options);
+int			ft_test_a(t_file *file, t_file *tmp);
+int			ft_test_t(t_file *file, t_file *tmp);
+int			ft_test_s(t_file *file, t_file *tmp);
+int 		ft_test_u(t_file *file, t_file *tmp);
 void		disp(t_file *file, t_opts *options);
 void		ft_print_dir_name(t_file *file, t_opts *options);
 void		ft_print_error(char *error, char *param);

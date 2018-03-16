@@ -14,13 +14,15 @@ static int 		ft_test_opts_2(char c, t_opts *opts)
 		opts->f = 1;
 	if (c == 'u')
 		opts->u = 1;
+	if (c == 's')
+		opts->s = 1;
 	return (0);
 }
 
 static int 		ft_test_opts(char c, t_opts *opts)
 {
 	if (c != 'q' && c != 'l' && c != 'R' && c != 'r' && c != 'a' && c != 't' && c != 'p'
-	 && c != 'd' && c != 'g' && c != 'f' && c != 'u')
+	 && c != 'd' && c != 'g' && c != 'f' && c != 'u'&& c != 's' && c != '-')
 		return (-1);
 	else
 	{
@@ -41,6 +43,7 @@ static int 		ft_test_opts(char c, t_opts *opts)
 static void		init_opts_2(t_opts *opts)
 {
 	opts->l = 0;
+	opts->s = 0;
 	opts->tab = 0;
 	opts->p = 0;
 	opts->g = 0;
@@ -64,7 +67,7 @@ static void		init_opts(t_opts *opts, int argc, char **argv)
 	j = 0;
 	while (i < argc)
 	{
-		if (argv[i][0] != '-')
+		if (argv[i][0] != '-' || (argv[i][0] == '-' && argv[i][1] == '\0'))
 			j++;			
 		i++;
 	}
@@ -85,7 +88,7 @@ t_opts			get_options(int argc, char **argv)
 	init_opts(&opts, argc, argv);
 	while (i < argc)
 	{
-		if (argv[i][0] == '-')
+		if (argv[i][0] == '-' && argv[i][1] != '\0')
 		{
 			k = 1;
 			while (argv[i][k] != '\0')
