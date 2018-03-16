@@ -90,8 +90,8 @@ all: $(NAME)
 
 $(NAME):
 	@$(CLANG) -c $(FLAG) $(SRC) -I .
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
 	@$(RM) $(OBJ)

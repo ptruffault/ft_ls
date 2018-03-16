@@ -15,7 +15,7 @@ static t_file *reverse_list(t_file *head)
     return (prev);
 }
 
-int		alpha(t_file *file, t_file *tmp)
+static int		alpha(t_file *file, t_file *tmp)
 {
 	char *cpy1;
 	char *cpy2;
@@ -29,7 +29,7 @@ int		alpha(t_file *file, t_file *tmp)
 	return (ret);
 }
 
-int 	ft_test_u(t_file *file, t_file *tmp)
+static int 	ft_test_u(t_file *file, t_file *tmp)
 {
 	if (file->access_time != tmp->access_time)
 		return ((file->access_time > tmp->access_time ? 0 : 1));
@@ -37,7 +37,7 @@ int 	ft_test_u(t_file *file, t_file *tmp)
 		return (alpha(file, tmp));
 }
 
-int		ft_test_t(t_file *file, t_file *tmp)
+static int		ft_test_t(t_file *file, t_file *tmp)
 {
 	if (file->modif_time != tmp->modif_time)
 		return ((file->modif_time > tmp->modif_time ? 0 : 1));

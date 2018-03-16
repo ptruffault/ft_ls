@@ -4,16 +4,6 @@ static int 		ft_test_opts_2(char c, t_opts *opts)
 {
 	if (c == 'q')
 		opts->tab = 1;
-	if (c == 'l')
-		opts->l = 1;
-	if (c == 'R')
-		opts->gr = 1;
-	if (c == 'r')
-		opts->r = 1;
-	if (c == 'a')
-		opts->a = 1;
-	if (c == 't')
-		opts->t = 1;
 	if (c == 'p')
 		opts->p = 1;
 	if (c == 'd')
@@ -33,7 +23,19 @@ static int 		ft_test_opts(char c, t_opts *opts)
 	 && c != 'd' && c != 'g' && c != 'f' && c != 'u')
 		return (-1);
 	else
+	{
+		if (c == 'l')
+			opts->l = 1;
+		if (c == 'R')
+			opts->gr = 1;
+		if (c == 'r')
+			opts->r = 1;
+		if (c == 'a')
+			opts->a = 1;
+		if (c == 't')
+			opts->t = 1;
 		return(ft_test_opts_2(c, opts));
+	}
 }
 
 static void		init_opts_2(t_opts *opts)

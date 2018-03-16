@@ -1,30 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/05 12:55:38 by tfleming          #+#    #+#             */
-/*   Updated: 2015/01/24 15:36:14 by tfleming         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FT_LS_H
 # define FT_LS_H
 
 # include "../libft/libft.h"			
-# include <stdlib.h> 			//malloc & free
-# include <stdio.h>  			//perror
-# include <dirent.h>			//opendir, closedir, readdir, DIR*	
-# include <sys/stat.h>			//stat stuff
-# include <errno.h>				//error numbers
-# include <pwd.h>				//get owner of file
-# include <grp.h>				//get group name of file
-# include <time.h>				//time, ctime
-# include <sys/types.h>			//uintmax_t, etc.
-# include <sys/xattr.h>			//listxattr
-
+# include <stdlib.h>
+# include <stdio.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <errno.h>
+# include <pwd.h>
+# include <grp.h>
+# include <time.h>
+# include <sys/types.h>
+# include <sys/xattr.h>
 
 typedef struct 	s_args t_args;
 struct s_args
@@ -52,14 +39,11 @@ typedef struct		s_opts
 	char			**args;
 }					t_opts;
 
-int 		get_total(t_file *file);
-void	ft_print_dir_name(t_file *file, t_opts *options);
-
-void		ft_print_error(char *error, char *param);
-int		alpha(t_file *file, t_file *tmp);
-
 t_opts		get_options(int argc, char **argv);
 t_file		*recursif_sort(t_file *file, t_opts *options);
 void		disp(t_file *file, t_opts *options);
+void		ft_print_dir_name(t_file *file, t_opts *options);
+void		ft_print_error(char *error, char *param);
 void		ft_disp_l(t_file *file, t_opts *options);
+int			get_total(t_file *file);
 #endif

@@ -27,20 +27,23 @@ CFLAGS		= -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME):
+	@clear
 	@make -C $(LIB_PATH) all
 	@gcc $(CFLAGS) $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
 	@echo "Create $(NAME)"
 
 small_clean:
 	@rm -rf $(NAME)
+	@echo "Clean $(NAME)"
 
 clean:
 	@make -C $(LIB_PATH) clean
+	@echo "Clean libft/"
 
 fclean:
 	@make -C $(LIB_PATH) fclean
 	@rm -f $(NAME)
-	@echo "Clean $(NAME) and libft"
+	@echo "Clean $(NAME)"
 
 re:	fclean all
 
@@ -48,6 +51,11 @@ fast_re: small_clean all
 
 no_flag: small_clean
 	@gcc $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
-	echo "Create $(NAME)"
+	@echo "Create $(NAME)"
+
+save: fclean
+	@git add *
+	@git commit -m "make save"
+	@git push
 
 .PHONY: all small_clean clean fclean re fast_re
