@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_file_information.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 17:45:03 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 18:23:14 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char		*find_mode(mode_t st_mode)
+static char	*find_mode(mode_t st_mode)
 {
 	char *str;
 
@@ -19,7 +31,7 @@ static char		*find_mode(mode_t st_mode)
 	return (str);
 }
 
-static	char	find_type(mode_t st_mode)
+static char	find_type(mode_t st_mode)
 {
 	if (S_ISDIR(st_mode) == 1)
 		return ('d');
@@ -38,26 +50,28 @@ static	char	find_type(mode_t st_mode)
 	return ('0');
 }
 
-void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path)
- {
- 	struct stat buf;
- 	struct group *grp;
- 	struct passwd *owner;
- 
- 	if ((!(file->name = ft_strdup(t_dir->d_name)))				||
-  	!(file->path = ft_new_path(path, file->name))				|| 	
- 	(lstat(file->path, &buf) < 0) 								||
- 	((file->type = find_type(buf.st_mode)) == '0') 				|| 
-	(!(owner = getpwuid(buf.st_uid)) || !(file->owner = ft_strdup(owner->pw_name)))	||
-	(!(grp = getgrgid(buf.st_gid)) 	|| !(file->group = ft_strdup(grp->gr_name)))	||
-	!(file->mode = find_mode(buf.st_mode)))
- 		ft_putendl_fd("Get_file_inf :impossible to take file's informations", 2);;
- 	file->modif_time = buf.st_mtime;
- 	file->access_time = buf.st_atime;
- 	file->block = (int)buf.st_blocks;
- 	file->nb_of_l = buf.st_nlink;
- 	file->size = buf.st_size;
- 	if (file->type == 'l' && (!(file->link = ft_strnew(BUFF_SIZE)) ||
- 	readlink(file->path, file->link, BUFF_SIZE) < 0))
- 		ft_putendl_fd("Get_file_inf :impossible to take file's informations", 2);
- }
+void		ft_get_file_inf(t_file *file, struct dirent *t_dir, char *path)
+{
+	struct stat		buf;
+	struct group	*grp;
+	struct passwd	*owner;
+
+	if ((!(file->name = ft_strdup(t_dir->d_name))) ||
+		!(file->path = ft_new_path(path, file->name)) ||
+		(lstat(file->path, &buf) < 0) ||
+		((file->type = find_type(buf.st_mode)) == '0') ||
+		(!(owner = getpwuid(buf.st_uid)) ||
+		!(file->owner = ft_strdup(owner->pw_name))) ||
+		(!(grp = getgrgid(buf.st_gid)) ||
+		!(file->group = ft_strdup(grp->gr_name))) ||
+		!(file->mode = find_mode(buf.st_mode)))
+		ft_putendl_fd("Get_file_inf:impossible to get file's informations", 2);
+	file->modif_time = buf.st_mtime;
+	file->access_time = buf.st_atime;
+	file->block = (int)buf.st_blocks;
+	file->nb_of_l = buf.st_nlink;
+	file->size = buf.st_size;
+	if (file->type == 'l' && (!(file->link = ft_strnew(BUFF_SIZE)) ||
+		readlink(file->path, file->link, BUFF_SIZE) < 0))
+		ft_putendl_fd("Get_file_inf:impossible to get file's informations", 2);
+}

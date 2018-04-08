@@ -6,7 +6,7 @@
 #    By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/16 11:16:13 by ptruffau          #+#    #+#              #
-#    Updated: 2018/04/08 15:37:04 by ptruffau         ###   ########.fr        #
+#    Updated: 2018/04/08 18:16:59 by ptruffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,6 @@ $(NAME):
 	@gcc $(CFLAGS) $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
 	@echo "$(SUCESS)"
 
-small_clean:
-	@rm -rf $(NAME)
-	@echo "$(COULEUR) -delete $(NAME) \033[00m"
-
 clean:
 	@make -C $(LIB_PATH) clean
 
@@ -56,33 +52,4 @@ fclean:
 
 re:	clear fclean all
 
-fast_re: clear small_clean
-	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(CFLAGS) $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
-	@echo "$(SUCESS)"
-
-
-no_flag: clear small_clean
-	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
-	@echo "$(SUCESS)"
-
-save: clear fclean
-	@git add *
-	@git commit -m "make save"
-	@git push
-
-load: clear fclean
-	@rm -rf srcs
-	@rm -rf includes
-	@rm -rf libft
-	@rm -rf auteur
-	@git clone https://github.com/ptruffault/ft_ls.git
-	@cp -r ft_ls/srcs .
-	@cp -r ft_ls/includes .
-	@cp -r ft_ls/libft .
-	@cp ft_ls/auteur .
-	@rm -rf ft_ls
-	@echo "$(SUCESS)"
-
-.PHONY: all small_clean clean fclean re fast_re
+.PHONY: all clean fclean re

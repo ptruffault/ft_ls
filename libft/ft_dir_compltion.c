@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_dir_compltion.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 17:21:21 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 17:35:31 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	*my_strchr(const char *s, int c)
@@ -19,10 +31,8 @@ static char	*split_name(char *path)
 	char *ptr;
 	char *ret;
 
-
 	if (path[ft_strlen(path) - 1] == '/')
 		path[ft_strlen(path) - 1] = '\0';
-
 	if ((ptr = my_strchr(path, '/')))
 	{
 		*ptr++ = '\0';
@@ -43,7 +53,7 @@ static char	*split_name(char *path)
 	}
 }
 
-static int 	test(char *name, char *str)
+static int	test(char *name, char *str)
 {
 	int i;
 	int j;
@@ -70,7 +80,7 @@ static int 	test(char *name, char *str)
 	return (1);
 }
 
-static void ft_sort(t_file *file, t_file *prev, char *str)
+static void	ft_sort(t_file *file, t_file *prev, char *str)
 {
 	while (file)
 	{
@@ -88,12 +98,12 @@ static void ft_sort(t_file *file, t_file *prev, char *str)
 	}
 }
 
-t_file *ft_dir_compltion(char *str)
+t_file		*ft_dir_compltion(char *str)
 {
-	t_file *head;
-	t_file *file;
-	t_file *prev;
-	char *name;
+	t_file	*head;
+	t_file	*file;
+	t_file	*prev;
+	char	*name;
 
 	name = split_name(str);
 	file = ft_new_tfile();

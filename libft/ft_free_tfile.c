@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free_tfile.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 17:31:17 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 17:31:19 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_del_tfile(t_file *file)
@@ -19,7 +31,7 @@ void	ft_del_tfile(t_file *file)
 	free(file);
 }
 
-void			ft_free_tfile(t_file *file)
+void	ft_free_tfile(t_file *file)
 {
 	t_file *tmp;
 

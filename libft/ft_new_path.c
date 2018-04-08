@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_new_path.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 17:07:12 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 17:08:09 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_new_path(char *s1, char *s2)
 {
-	char *new_path;
-	size_t path_len;
-	size_t len;
-	size_t i;
-	size_t j;
+	char	*new_path;
+	size_t	path_len;
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -22,8 +34,8 @@ char	*ft_new_path(char *s1, char *s2)
 			new_path[i] = '/';
 		else
 			new_path[i] = s2[j++];
-		i++; 
+		i++;
 	}
 	new_path[i] = '\0';
-	return (new_path);	
+	return (new_path);
 }
