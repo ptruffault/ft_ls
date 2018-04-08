@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 16:13:25 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 16:18:54 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
-static void	ft_disp_l2(t_file *file, t_opts *options)
+static void		ft_disp_l2(t_file *file, t_opts *opts)
 {
 	char *date;
 
 	ft_putnbr(file->size);
 	ft_putchar('\t');
-	if ((options->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))  ||
-	(options->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
+	if ((opts->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))
+	|| (opts->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
 		ft_print_error("ft_ls : allocation failed", NULL);
 	else
 	{
@@ -17,7 +29,7 @@ static void	ft_disp_l2(t_file *file, t_opts *options)
 	}
 }
 
-void		ft_disp_l(t_file *file, t_opts *options)
+void			ft_disp_l(t_file *file, t_opts *options)
 {
 	ft_putchar(file->type);
 	ft_putstr_color(file->mode, CYAN);
@@ -34,7 +46,7 @@ void		ft_disp_l(t_file *file, t_opts *options)
 	ft_disp_l2(file, options);
 }
 
-void	ft_print_error(char *error, char *param)
+void			ft_print_error(char *error, char *param)
 {
 	if (error != NULL)
 	{
@@ -52,22 +64,23 @@ void	ft_print_error(char *error, char *param)
 	exit(-1);
 }
 
-static t_file *reverse_list(t_file *head)
+static t_file	*reverse_list(t_file *head)
 {
-    t_file *prev = NULL;
-    t_file *next;
+	t_file *prev;
+	t_file *next;
 
-    while (head != NULL) 
-    {
-        next = head->next;
-        head->next = prev;
-        prev = head;
-        head = next;
-    }
-    return (prev);
+	prev = NULL;
+	while (head != NULL)
+	{
+		next = head->next;
+		head->next = prev;
+		prev = head;
+		head = next;
+	}
+	return (prev);
 }
 
-t_file	*recursif_sort(t_file *file, t_opts *options)
+t_file			*recursif_sort(t_file *file, t_opts *options)
 {
 	t_file *tmp;
 
@@ -84,7 +97,8 @@ t_file	*recursif_sort(t_file *file, t_opts *options)
 	tmp = file;
 	while (tmp)
 	{
-		if (tmp->type == 'd' && (tmp->sdir) && (options->a == 1 || *tmp->name != '.'))
+		if (tmp->type == 'd' && (tmp->sdir) &&
+		(options->a == 1 || *tmp->name != '.'))
 			tmp->sdir = recursif_sort(tmp->sdir, options);
 		tmp = tmp->next;
 	}

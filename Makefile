@@ -6,7 +6,7 @@
 #    By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/16 11:16:13 by ptruffau          #+#    #+#              #
-#    Updated: 2018/01/07 16:59:07 by ptruffau         ###   ########.fr        #
+#    Updated: 2018/04/08 15:37:04 by ptruffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ LIB_PATH	= ./libft/
 
 LIB			= -Llibft/ -lft
 
-SRC			= srcs/Affichage.c \
+SRC			= srcs/affichage.c \
 			srcs/main.c \
-			srcs/Options.c \
-			srcs/Sort_tools.c \
-			srcs/Tools.c \
+			srcs/option.c \
+			srcs/sort_tools.c \
+			srcs/tools.c \
 			
 CFLAGS		= -Wall -Werror -Wextra
 

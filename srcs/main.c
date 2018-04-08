@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 16:42:59 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 16:43:03 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
 static void	free_opts(t_opts *opts)
@@ -10,20 +22,20 @@ static void	free_opts(t_opts *opts)
 	free(opts->args);
 }
 
-int		get_total(t_file *file)
+int			get_total(t_file *file)
 {
 	int total;
 
 	total = 0;
-	while ((file))  
+	while ((file))
 	{
 		total = total + file->block;
 		file = file->next;
 	}
-	return(total/2);
+	return (total / 2);
 }
 
-void	ft_print_dir_name(t_file *file, t_opts *options)
+void		ft_print_dir_name(t_file *file, t_opts *options)
 {
 	int tab;
 
@@ -52,7 +64,7 @@ static void	arguments(t_opts *options, t_file *file)
 	{
 		if ((file = ft_search_tfile(options->args[i], options->gr)))
 		{
-			if (file->type == 'd' && (file->sdir)) 
+			if (file->type == 'd' && (file->sdir))
 			{
 				if (options->f == 0)
 					file->sdir = recursif_sort(file->sdir, options);
@@ -68,7 +80,7 @@ static void	arguments(t_opts *options, t_file *file)
 	free_opts(options);
 }
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_opts options;
 	t_file *file;

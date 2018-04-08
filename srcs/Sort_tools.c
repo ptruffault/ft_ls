@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_tools.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/08 15:48:42 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/04/08 16:12:59 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
-int		ft_test_a(t_file *file, t_file *tmp)
+int	ft_test_a(t_file *file, t_file *tmp)
 {
-	char *cpy1;
-	char *cpy2;
-	int ret;
+	char	*cpy1;
+	char	*cpy2;
+	int		ret;
 
 	cpy1 = ft_caps_lock(file->name);
 	cpy2 = ft_caps_lock(tmp->name);
@@ -19,10 +31,10 @@ int	ft_test_s(t_file *file, t_file *tmp)
 	if (file->size != tmp->size)
 		return ((file->size > tmp->size ? 0 : 1));
 	else
-		return (ft_test_a(file, tmp));	
+		return (ft_test_a(file, tmp));
 }
 
-int 	ft_test_u(t_file *file, t_file *tmp)
+int	ft_test_u(t_file *file, t_file *tmp)
 {
 	if (file->access_time != tmp->access_time)
 		return ((file->access_time > tmp->access_time ? 0 : 1));
@@ -30,7 +42,7 @@ int 	ft_test_u(t_file *file, t_file *tmp)
 		return (ft_test_a(file, tmp));
 }
 
-int		ft_test_t(t_file *file, t_file *tmp)
+int	ft_test_t(t_file *file, t_file *tmp)
 {
 	if (file->modif_time != tmp->modif_time)
 		return ((file->modif_time > tmp->modif_time ? 0 : 1));
