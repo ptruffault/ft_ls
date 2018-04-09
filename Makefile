@@ -28,11 +28,6 @@ COULEUR		= \033[01;34m
 
 SUCESS		= [\033[1;32mOK\033[00m]
 
-all: $(NAME)
-
-clear:
-	@clear
-
 $(NAME):
 	@echo "$(COULEUR) -Creating libft.a \033[00m"
 	@make -C $(LIB_PATH) all
@@ -40,6 +35,8 @@ $(NAME):
 	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
 	@gcc $(CFLAGS) $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
 	@echo "$(SUCESS)"
+
+all: $(NAME)
 
 clean:
 	@make -C $(LIB_PATH) clean
@@ -50,6 +47,6 @@ fclean:
 	@rm -f $(NAME)
 	@echo "$(SUCESS)"
 
-re:	clear fclean all
+re:	fclean all
 
 .PHONY: all clean fclean re

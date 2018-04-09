@@ -34,13 +34,17 @@ static void	ft_opendir(char *path, t_file *file, int recursive)
 
 	if (!(dir = opendir(path)))
 	{
-		ft_putendl_fd("get_file->opendir :", 2);
+		ft_putendl_fd("get_file : impossible to open directory:", 2);
 		perror(path);
+		return ;
 	}
 	else if ((path))
 		read_all_dir(file, path, dir, recursive);
 	if (closedir(dir) == -1)
+	{
+		ft_putendl_fd("get_file : impossible to close directory:", 2);
 		perror(path);
+	}
 }
 
 t_file		*ft_get_tfile(char *path, int recursive)
