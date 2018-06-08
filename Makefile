@@ -45,9 +45,6 @@ bin/%.o: $(FILES_FOLD)/%.c
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "$(COLOR)$< : $(DONE)"
 
-
-all: $(NAME)
-
 clean:
 	@rm -rf $(OBJ)
 
