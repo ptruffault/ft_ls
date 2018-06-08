@@ -45,17 +45,20 @@ bin/%.o: $(FILES_FOLD)/%.c
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "$(COLOR)$< : $(DONE)"
 
-clean:
-	@make -C libft/ fclean
+cln:
 	@rm -rf $(OBJ)
+
+clean: cln
+	@make -C libft/ fclean
 
 fclean: clean
 	@rm -rf $(NAME)
 
-mrpropre: fclean  
-	@make -C ./libft fclean
+re:	fclean all
 
-re:	clean all
+zam: cln all
+
+
 
 .PHONY: all clean fclean mrpropre re
 
