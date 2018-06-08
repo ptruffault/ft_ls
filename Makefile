@@ -35,7 +35,7 @@ all: bin $(NAME)
 $(NAME): $(OBJ)
 	@make -C ./libft/ all
 	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(CFLAGS) main.c $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
+	@gcc $(CFLAGS) srcs/main.c $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
 	@echo "$(SUCESS)"
 
 bin:
