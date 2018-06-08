@@ -6,11 +6,28 @@
 /*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 15:48:42 by ptruffau          #+#    #+#             */
-/*   Updated: 2018/04/08 16:12:59 by ptruffau         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:26:29 by ptruffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+static char *ft_caps_lock(char *str)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	ret = ft_strdup(str);
+	while (ret[i])
+	{
+		ret[i] = ft_toupper(ret[i]);
+		i++;
+	}
+	return (ret);
+}
+
+
 
 int	ft_test_a(t_file *file, t_file *tmp)
 {

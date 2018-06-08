@@ -6,13 +6,13 @@
 /*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:26:00 by ptruffau          #+#    #+#             */
-/*   Updated: 2018/04/08 16:35:48 by ptruffau         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:22:27 by ptruffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <dirent.h>
