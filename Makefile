@@ -46,6 +46,7 @@ bin/%.o: $(FILES_FOLD)/%.c
 	@echo "$(COLOR)$< : $(DONE)"
 
 clean:
+	@make -C libft/ fclean
 	@rm -rf $(OBJ)
 
 fclean: clean
