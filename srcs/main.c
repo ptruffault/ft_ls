@@ -6,7 +6,7 @@
 /*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:42:59 by ptruffau          #+#    #+#             */
-/*   Updated: 2018/04/08 16:43:03 by ptruffau         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:50:02 by ptruffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			get_total(t_file *file)
 		total = total + file->block;
 		file = file->next;
 	}
-	return (total / 2);
+	return (total);
 }
 
 void		ft_print_dir_name(t_file *file, t_opts *options)
