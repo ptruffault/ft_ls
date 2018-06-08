@@ -12,16 +12,14 @@
 
 NAME		= ft_ls
 
-LIB_PATH	= ./libft/
-
-LIB			= -Llibft/ -lft
-
 SRC			= srcs/affichage.c \
 			srcs/main.c \
 			srcs/option.c \
 			srcs/sort_tools.c \
 			srcs/tools.c \
-			
+
+GIT 		= https://github.com/ptruffault/ft_ls.git
+
 CFLAGS		= -Wall -Werror -Wextra
 
 COULEUR		= \033[01;34m
@@ -29,24 +27,30 @@ COULEUR		= \033[01;34m
 SUCESS		= [\033[1;32mOK\033[00m]
 
 $(NAME):
-	@echo "$(COULEUR) -Creating libft.a \033[00m"
-	@make -C $(LIB_PATH) all
-	@echo "$(SUCESS)"
+	@make -C ./libft/ all
 	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(CFLAGS) $(SRC) -I $(LIB_PATH) $(LIB) -o $(NAME)
+	@gcc $(CFLAGS) $(SRC) -I ./includes -Llibft/ -lft -o $(NAME)
 	@echo "$(SUCESS)"
 
 all: $(NAME)
 
 clean:
-	@make -C $(LIB_PATH) clean
+	@rm -rf $(NAME)
 
-fclean:
-	@echo "$(COULEUR) -Cleaning libft and delete $(NAME) \033[00m"
-	@make -C $(LIB_PATH) fclean
-	@rm -f $(NAME)
-	@echo "$(SUCESS)"
+fclean: clean
+	@make -C ./libft/ fclean
 
-re:	fclean all
+re:	clean all
 
 .PHONY: all clean fclean re
+
+save: fclean
+	@git add * srcs/* includes/*
+	@git commit -m  "make save"
+	@git push
+	@echo "$(DONE)"
+
+load:
+	@rm -rf *
+	@git clone $(GIT) TMP && mv TMP/* . && rm -rf TMP libft
+	@git clone https://github.com/ptruffault/libft.git

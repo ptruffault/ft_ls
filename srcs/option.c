@@ -16,6 +16,8 @@ static int	ft_test_opts_2(char c, t_opts *opts)
 {
 	if (c == 'q')
 		opts->tab = 1;
+	if (c == '1')
+		opts->tab = 0;
 	if (c == 'p')
 		opts->p = 1;
 	if (c == 'd')
