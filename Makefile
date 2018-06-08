@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 bin:
 	@mkdir $@
 
-bin/%.o: srcs/%.c 
+bin/%.o: $(FILES_FOLD)/%.c 
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "$(COLOR)$< : $(DONE)"
 
