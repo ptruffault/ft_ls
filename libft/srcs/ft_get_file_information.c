@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_get_file_information.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 10:57:04 by ptruffau          #+#    #+#             */
-/*   Updated: 2017/11/16 11:11:47 by ptruffau         ###   ########.fr       */
+/*   Created: 2018/06/08 17:16:51 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/06/08 17:24:11 by ptruffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,24 @@ static	char	find_type(mode_t st_mode)
 
 void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path)
  {
- 	struct stat buf;
- 	struct group *grp;
- 	struct passwd *owner;
- 
- 	if ((!(file->name = ft_strdup(t_dir->d_name)))				||
-  	!(file->path = ft_new_path(path, file->name))				|| 	
- 	(lstat(file->path, &buf) < 0) 								||
- 	((file->type = find_type(buf.st_mode)) == '0') 				|| 
-	(!(owner = getpwuid(buf.st_uid)) || !(file->owner = ft_strdup(owner->pw_name)))	||
-	(!(grp = getgrgid(buf.st_gid)) 	|| !(file->group = ft_strdup(grp->gr_name)))	||
+	struct stat buf;
+	struct group *grp;
+	struct passwd *owner;
+
+	if ((!(file->name = ft_strdup(t_dir->d_name))) ||
+	!(file->path = ft_new_path(path, file->name)) ||
+	(lstat(file->path, &buf) < 0) ||
+	((file->type = find_type(buf.st_mode)) == '0') || 
+	(!(owner = getpwuid(buf.st_uid)) || !(file->owner = ft_strdup(owner->pw_name))) ||
+	(!(grp = getgrgid(buf.st_gid)) || !(file->group = ft_strdup(grp->gr_name))) ||
 	!(file->mode = find_mode(buf.st_mode)))
- 		ft_putendl_fd("Get_file_inf :impossible to take file's informations", 2);;
- 	file->modif_time = buf.st_mtime;
- 	file->access_time = buf.st_atime;
- 	file->block = (int)buf.st_blocks;
- 	file->nb_of_l = buf.st_nlink;
- 	file->size = buf.st_size;
- 	if (file->type == 'l' && (!(file->link = ft_strnew(BUFF_SIZE)) ||
- 	readlink(file->path, file->link, BUFF_SIZE) < 0))
- 		ft_putendl_fd("Get_file_inf :impossible to take file's informations", 2);
- }
+		ft_putendl_fd("Get_file_inf:impossible to take file's info", 2);
+	file->modif_time = buf.st_mtime;
+	file->access_time = buf.st_atime;
+	file->block = (int)buf.st_blocks;
+	file->nb_of_l = buf.st_nlink;
+	file->size = buf.st_size;
+	if (file->type == 'l' && (!(file->link = ft_strnew(BUFF_SIZE)) ||
+		readlink(file->path, file->link, BUFF_SIZE) < 0))
+		ft_putendl_fd("Get_file_inf:impossible to take file's info", 2);
+}

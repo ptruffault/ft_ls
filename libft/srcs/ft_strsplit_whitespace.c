@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strsplit_whitespace.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/08 15:42:44 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/06/08 15:52:02 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
 static int	ft_nw(char *s)
@@ -20,10 +32,10 @@ static int	ft_nw(char *s)
 	return (n);
 }
 
-char	*get_next_word(char *str)
+char		*get_next_word(char *str)
 {
-	char *word;
-	int j;
+	char	*word;
+	int		j;
 
 	j = 0;
 	word = NULL;
@@ -41,11 +53,11 @@ char	*get_next_word(char *str)
 	return (word);
 }
 
-char	**ft_strsplit_whitespace(char *str)
+char		**ft_strsplit_whitespace(char *str)
 {
-	int i;
-	int k;
-	char **tab;
+	int		i;
+	int		k;
+	char	**tab;
 
 	i = 0;
 	k = 0;
@@ -54,7 +66,7 @@ char	**ft_strsplit_whitespace(char *str)
 	{
 		ft_putendl_fd("ft_strsplit_whitespace : allocation failed", 2);
 		return (NULL);
-	} 
+	}
 	while (str[i] != '\0')
 	{
 		while (IS_SPACE(str[i]))

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_freestrarr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,12 @@
 
 #include "../includes/libft.h"
 
-void	ft_freestr(char *s)
-{
-	if (!s)
-		return ;
-	free(s);
-	s = NULL;
-}
-
 void	ft_freestrarr(char **arr)
 {
 	int i;
 
 	i = 0;
 	while (arr[i] != NULL)
-		ft_freestr(arr[i++]);
+		ft_strdel(&arr[i++]);
 	arr = NULL;
 }

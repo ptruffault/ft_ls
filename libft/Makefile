@@ -48,6 +48,7 @@ bin:
 	@mkdir $@
 
 bin/%.o: srcs/%.c 
+	@cat $< > $<tmp && rm -rf $< && mv $<tmp $< 
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "\t$(COLOR)$< : $(DONE)"
 

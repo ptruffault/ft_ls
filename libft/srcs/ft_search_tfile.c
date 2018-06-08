@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_search_tfile.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/08 16:11:26 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/06/08 16:17:12 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
-static char	*my_strchr(const char *s, int c)
+static char		*my_strchr(const char *s, int c)
 {
 	int i;
 
@@ -14,23 +26,18 @@ static char	*my_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char	*split_name(char *path)
+static char		*split_name(char *path)
 {
 	char *ptr;
 	char *ret;
 
-
 	if (path[ft_strlen(path) - 1] == '/')
 		path[ft_strlen(path) - 1] = '\0';
-
 	if ((ptr = my_strchr(path, '/')))
 	{
 		*ptr++ = '\0';
 		if (!(ret = ft_strdup(ptr)))
-		{
-			ft_putendl_fd("ft_ls : allocation failed", 2);
-			exit (-1);
-		}
+			return (NULL);
 	}
 	else if ((ret = ft_strdup(path)))
 	{
@@ -38,14 +45,11 @@ static char	*split_name(char *path)
 		path[1] = '\0';
 	}
 	else
-	{
-		ft_putendl_fd("ft_ls : allocation failed", 2);
-		exit (-1);
-	}
+		return (NULL);
 	return (ret);
 }
 
-static t_file *ft_find(t_file *file, char *name)
+static t_file	*ft_find(t_file *file, char *name)
 {
 	t_file *prev;
 	t_file *tmp;
@@ -73,13 +77,17 @@ static t_file *ft_find(t_file *file, char *name)
 	return (NULL);
 }
 
-t_file	*ft_search_tfile(char *path, int recursif)
+t_file			*ft_search_tfile(char *path, int recursif)
 {
-	t_file *file;
-	t_file *ret;
-	char *name;
+	t_file	*file;
+	t_file	*ret;
+	char	*name;
 
-	name = split_name(path);
+	if (!(name = split_name(path)))
+	{
+		ft_putendl_fd("ft_search_file : FAILED", 2);
+		return (NULL);
+	}
 	file = ft_get_tfile(path, 0);
 	if (!(ret = ft_find(file, name)))
 	{

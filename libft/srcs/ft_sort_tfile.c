@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_tfile.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptruffau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/08 16:19:08 by ptruffau          #+#    #+#             */
+/*   Updated: 2018/06/08 16:22:38 by ptruffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
-static t_file *test_upper(t_file *file, int (*f)(t_file *file, t_file *tmp))
+static t_file	*test_upper(t_file *file, int (*f)(t_file *file, t_file *tmp))
 {
 	t_file *tmp;
 
@@ -14,12 +26,12 @@ static t_file *test_upper(t_file *file, int (*f)(t_file *file, t_file *tmp))
 	}
 	return (NULL);
 }
- 
-static int		ft_sort_parcours(t_file *prev, int (*f)(t_file *file, t_file *tmp))
+
+static int		ft_sort_parcours(t_file *prev, int (*f)(t_file *fe, t_file *t))
 {
-	int ret;
-	t_file *file;
-	t_file *tmp;
+	int		ret;
+	t_file	*file;
+	t_file	*tmp;
 
 	file = prev->next;
 	ret = 1;
@@ -39,10 +51,10 @@ static int		ft_sort_parcours(t_file *prev, int (*f)(t_file *file, t_file *tmp))
 	return (ret);
 }
 
-t_file	*ft_sort_tfile(t_file *file, int (*f)(t_file *file, t_file *tmp))
+t_file			*ft_sort_tfile(t_file *file, int (*f)(t_file *fi, t_file *t))
 {
-	t_file *prev;
-	int is_sort;
+	t_file	*prev;
+	int		is_sort;
 
 	if (!(*f) || !(file))
 		return (NULL);

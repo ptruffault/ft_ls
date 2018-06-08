@@ -12,11 +12,10 @@
 
 NAME		= ft_ls
 
-SRC			= srcs/affichage.c \
-			srcs/main.c \
-			srcs/option.c \
-			srcs/sort_tools.c \
-			srcs/tools.c \
+FILES		= affichage.c \
+			option.c \
+			sort_tools.c \
+			tools.c \
 
 GIT 		= https://github.com/ptruffault/ft_ls.git
 
@@ -26,23 +25,42 @@ COULEUR		= \033[01;34m
 
 SUCESS		= [\033[1;32mOK\033[00m]
 
-$(NAME):
+FILES_FOLD	= ./srcs/
+OBJ_FOLD	= ./bin/
+SRC 		= $(addprefix $(FILES_FOLD), $(FILES))
+OBJ			= $(addprefix $(OBJ_FOLD), $(FILES:.c=.o))
+
+all: bin $(NAME)
+
+$(NAME): $(OBJ)
 	@make -C ./libft/ all
 	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(CFLAGS) $(SRC) -I ./includes -Llibft/ -lft -o $(NAME)
+	@gcc $(CFLAGS) srcs/main.c $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
 	@echo "$(SUCESS)"
 
-all: $(NAME)
+bin:
+	@mkdir $@
 
-clean:
-	@rm -rf $(NAME)
+bin/%.o: $(FILES_FOLD)/%.c 
+	@gcc $(FLAG) -I includes/ -c $< -o $@
+	@echo "$(COLOR)$< : $(DONE)"
+
+cln:
+	@rm -rf $(OBJ)
+
+clean: cln
+	@make -C libft/ fclean
 
 fclean: clean
-	@make -C ./libft/ fclean
+	@rm -rf $(NAME)
 
-re:	clean all
+re:	fclean all
 
-.PHONY: all clean fclean re
+zam: cln all
+
+
+
+.PHONY: all clean fclean mrpropre re
 
 save: fclean
 	@git add * srcs/* includes/*
