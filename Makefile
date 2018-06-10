@@ -11,20 +11,15 @@
 # **************************************************************************** #
 
 NAME		= ft_ls
-
 FILES		= affichage.c \
 			option.c \
 			sort_tools.c \
 			tools.c \
-
+			main.c
 GIT 		= https://github.com/ptruffault/ft_ls.git
-
 CFLAGS		= -Wall -Werror -Wextra
-
 COULEUR		= \033[01;34m
-
 SUCESS		= [\033[1;32mOK\033[00m]
-
 FILES_FOLD	= ./srcs/
 OBJ_FOLD	= ./bin/
 SRC 		= $(addprefix $(FILES_FOLD), $(FILES))
@@ -35,7 +30,7 @@ all: bin $(NAME)
 $(NAME): $(OBJ)
 	@make -C ./libft/ all
 	@echo "$(COULEUR) -Creating $(NAME) \033[00m"
-	@gcc $(CFLAGS) srcs/main.c $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
 	@echo "$(SUCESS)"
 
 bin:
@@ -57,8 +52,6 @@ fclean: clean
 re:	fclean all
 
 zam: cln all
-
-
 
 .PHONY: all clean fclean mrpropre re
 
