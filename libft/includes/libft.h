@@ -49,6 +49,7 @@ typedef struct s_file t_file;
 struct s_file
 {
 	char		*name;
+	char		*path;
 	char		type;
 	char		*mode;
 	int 		nb_of_l; 		
@@ -57,7 +58,6 @@ struct s_file
 	int 		size;
 	time_t		modif_time;
 	time_t		access_time;
-	char		*path;
 	int 		block;
 	char		*link;
 	int   		total;
@@ -73,7 +73,8 @@ struct	s_list
 };
 
 
-
+void	warning(char *descript, char *opts);
+void	error(char *descript, char *opts);
 char 	*ft_arr_to_str(char **arr);
 char 	*ft_char_to_str(char c);
 char 	*ft_itoa_base_intmax(intmax_t value, int base);

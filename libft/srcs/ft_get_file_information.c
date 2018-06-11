@@ -63,7 +63,7 @@ void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path)
 	(!(owner = getpwuid(buf.st_uid)) || !(file->owner = ft_strdup(owner->pw_name))) ||
 	(!(grp = getgrgid(buf.st_gid)) || !(file->group = ft_strdup(grp->gr_name))) ||
 	!(file->mode = find_mode(buf.st_mode)))
-		ft_putendl_fd("Get_file_inf:impossible to take file's info", 2);
+		error("impossible to take file's info", path);
 	file->modif_time = buf.st_mtime;
 	file->access_time = buf.st_atime;
 	file->block = (int)buf.st_blocks;
@@ -71,5 +71,5 @@ void	ft_get_file_information(t_file *file, struct dirent *t_dir, char *path)
 	file->size = buf.st_size;
 	if (file->type == 'l' && (!(file->link = ft_strnew(BUFF_SIZE)) ||
 		readlink(file->path, file->link, BUFF_SIZE) < 0))
-		ft_putendl_fd("Get_file_inf:impossible to take file's info", 2);
+		warning("impossible to take link's info", path);
 }

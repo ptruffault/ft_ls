@@ -45,7 +45,7 @@ char		*get_next_word(char *str)
 	{
 		if (!(word = ft_strnew(j)))
 		{
-			ft_putendl_fd("ft_strsplit_whitespace : allocation failed", 2);
+			error("allocation failed", "ft_strsplit_whitespace");
 			return (NULL);
 		}
 		word = ft_strncpy(word, str, j);
@@ -64,7 +64,7 @@ char		**ft_strsplit_whitespace(char *str)
 	tab = NULL;
 	if (!(tab = (char **)malloc(sizeof(char *) * ft_nw(str) + 1)))
 	{
-		ft_putendl_fd("ft_strsplit_whitespace : allocation failed", 2);
+		error("allocation failed", "ft_strsplit_whitespace");
 		return (NULL);
 	}
 	while (str[i] != '\0')

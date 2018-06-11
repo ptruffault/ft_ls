@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-static char		*my_strchr(const char *s, int c)
+char		*my_strchr(const char *s, int c)
 {
 	int i;
 
@@ -31,22 +31,21 @@ static char		*split_name(char *path)
 	char *ptr;
 	char *ret;
 
-	if (path[ft_strlen(path) - 1] == '/')
-		path[ft_strlen(path) - 1] = '\0';
+	if (((*path == '.' || *path == '/') && *(path + 1) == '\0')
+		|| ft_strequ(path, "..") )
+		return (ft_strdup("."));
 	if ((ptr = my_strchr(path, '/')))
 	{
-		*ptr++ = '\0';
-		if (!(ret = ft_strdup(ptr)))
-			return (NULL);
+		ret = ft_strdup(ptr + 1);
+		*(ptr + 1) = '\0';
+		return (ret);
 	}
-	else if ((ret = ft_strdup(path)))
-	{
-		path[0] = '.';
-		path[1] = '\0';
-	}
-	else
-		return (NULL);
-	return (ret);
+
+
+
+
+
+	return (NULL);
 }
 
 static t_file	*ft_find(t_file *file, char *name)
@@ -83,16 +82,12 @@ t_file			*ft_search_tfile(char *path, int recursif)
 	t_file	*ret;
 	char	*name;
 
-	if (!(name = split_name(path)))
-	{
-		ft_putendl_fd("ft_search_file : FAILED", 2);
-		return (NULL);
-	}
+	name = split_name(path);
+	printf("NAME = %s\nPATH = %s\n", name , path);
 	file = ft_get_tfile(path, 0);
 	if (!(ret = ft_find(file, name)))
 	{
-		ft_putendl_fd("ft_search_file : no such file or directory :", 2);
-		ft_putendl_fd(name, 2);
+		warning("no such file or directory", path);
 		return (NULL);
 	}
 	if (ret->type == 'd')
