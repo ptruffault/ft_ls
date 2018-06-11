@@ -14,10 +14,8 @@
 
 static int	ft_test_opts_2(char c, t_opts *opts)
 {
-	if (c == 'q')
-		opts->tab = 1;
 	if (c == '1')
-		opts->tab = 0;
+		opts->tab = 1;
 	if (c == 'p')
 		opts->p = 1;
 	if (c == 'd')
@@ -35,9 +33,8 @@ static int	ft_test_opts_2(char c, t_opts *opts)
 
 static int	ft_test_opts(char c, t_opts *opts)
 {
-	if (c != 'q' && c != 'l' && c != 'R' && c != 'r' && c != 'a' && c != 't'
-	&& c != 'p' && c != 'd' && c != 'g' && c != 'f' && c != 'u' && c != 's'
-	&& c != '-')
+	if (c != '1' && c != 'l' && c != 'R' && c != 'r' && c != 'a' && c != 't'
+	&& c != 'p' && c != 'd' && c != 'g' && c != 'f' && c != 'u' && c != 's')
 		return (-1);
 	else
 	{
@@ -88,7 +85,7 @@ static void	init_opts(t_opts *opts, int argc, char **argv)
 	}
 	opts->nb_of_arg = j;
 	if (j != 0 && !(opts->args = (char **)malloc(sizeof(char *) * j)))
-		ft_print_error("ft_ls : allocation failed", NULL);
+		error("allocation failed", NULL);
 }
 
 t_opts		get_options(int argc, char **argv)
@@ -109,7 +106,7 @@ t_opts		get_options(int argc, char **argv)
 			while (argv[i][k] != '\0')
 			{
 				if (ft_test_opts(argv[i][k], &opts) == -1)
-					ft_print_error("ft_ls : invalid option", argv[i]);
+					warning("invalid option", argv[i]);
 				k++;
 			}
 		}

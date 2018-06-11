@@ -40,12 +40,10 @@ static char		*split_name(char *path)
 		*(ptr + 1) = '\0';
 		return (ret);
 	}
-
-
-
-
-
-	return (NULL);
+	ret = ft_strdup(path);
+	ft_strdel(&path);
+	path = ft_strdup(".");
+	return (ret);
 }
 
 static t_file	*ft_find(t_file *file, char *name)
@@ -83,7 +81,6 @@ t_file			*ft_search_tfile(char *path, int recursif)
 	char	*name;
 
 	name = split_name(path);
-	printf("NAME = %s\nPATH = %s\n", name , path);
 	file = ft_get_tfile(path, 0);
 	if (!(ret = ft_find(file, name)))
 	{

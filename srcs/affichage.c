@@ -21,7 +21,7 @@ static void	ft_in_tabulation(char type, int n)
 	if ((type == 'd' && !(color_str = ft_strjoin(VERT, "|-> "))) ||
 	(type == 'l' && !(color_str = ft_strjoin(MAGENTA, "|->"))) ||
 	((type != 'd' && type != 'l') && !(color_str = ft_strjoin(NORMAL, "|-> "))))
-		ft_print_error("ft_ls : allocation failed", NULL);
+		error("ft_ls : allocation failed", NULL);
 	if (color_str)
 	{
 		ft_putstr(color_str);

@@ -73,8 +73,8 @@ static void	arguments(t_opts *options, t_file *file)
 			}
 			else
 				disp(file, options);
+			ft_free_tfile(file);
 		}
-		ft_free_tfile(file);
 		i++;
 	}
 	free_opts(options);

@@ -15,7 +15,7 @@ FILES		= affichage.c \
 			option.c \
 			sort_tools.c \
 			tools.c \
-			main.c
+			main.c 
 GIT 		= https://github.com/ptruffault/ft_ls.git
 CFLAGS		= -Wall -Werror -Wextra
 COULEUR		= \033[01;34m

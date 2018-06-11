@@ -24,14 +24,6 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 
-typedef struct s_args	t_args;
-struct	s_args
-{
-	char	*arg;
-	char	*path;
-	int		done;
-	t_args	*next;
-};
 
 typedef struct s_opts	t_opts;
 struct	s_opts
@@ -63,4 +55,6 @@ void	ft_print_dir_name(t_file *file, t_opts *options);
 void	ft_print_error(char *error, char *param);
 void	ft_disp_l(t_file *file, t_opts *options);
 int		get_total(t_file *file);
+void	warning(char *descript, char *opts);
+void	error(char *descript, char *opts);
 #endif

@@ -20,7 +20,7 @@ static void		ft_disp_l2(t_file *file, t_opts *opts)
 	ft_putchar('\t');
 	if ((opts->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))
 	|| (opts->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
-		ft_print_error("ft_ls : allocation failed", NULL);
+		error("ft_ls : allocation failed", NULL);
 	else
 	{
 		ft_putstr_color(date, SOULIGNE);
@@ -44,24 +44,6 @@ void			ft_disp_l(t_file *file, t_opts *options)
 	ft_putstr_color(file->group, NORMAL);
 	ft_putchar('\t');
 	ft_disp_l2(file, options);
-}
-
-void			ft_print_error(char *error, char *param)
-{
-	if (error != NULL)
-	{
-		ft_putstr_fd("ft_ls :", 2);
-		ft_putstr_fd(error, 2);
-	}
-	if (param != NULL)
-	{
-		ft_putchar_fd(' ', 2);
-		ft_putchar_fd('\'', 2);
-		ft_putstr_fd(param, 2);
-		ft_putchar_fd('\'', 2);
-	}
-	ft_putchar('\n');
-	exit(-1);
 }
 
 static t_file	*reverse_list(t_file *head)
