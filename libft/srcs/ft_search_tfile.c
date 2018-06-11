@@ -41,7 +41,6 @@ static char		*split_name(char *path)
 		return (ret);
 	}
 	ret = ft_strdup(path);
-	ft_strdel(&path);
 	path = ft_strdup(".");
 	return (ret);
 }

@@ -98,7 +98,7 @@ int		get_next_line(const int fd, char **line);
 char 	*ft_get_input(void);
 int		ft_strcmp_castless(char *s1, char *s2);
 
-void	ft_freestrarr(char **arr);
+void	ft_freestrarr(char ***arr);
 void	*ft_realloc(void *ptr, size_t prev_size, size_t new_size);
 int		ft_str_startwith(char *s1, char *s2);
 char	**ft_strsplit_whitespace(char *s);

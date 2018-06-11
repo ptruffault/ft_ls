@@ -15,20 +15,21 @@
 void	ft_del_tfile(t_file *file)
 {
 	if (file->type == 'l' && (file->link))
-		free(file->link);
+		ft_strdel(&file->link);
 	if ((file->name))
-		free(file->name);
+		ft_strdel(&file->name);
 	if ((file->owner))
-		free(file->owner);
+		ft_strdel(&file->owner);
 	if ((file->group))
-		free(file->group);
+		ft_strdel(&file->group);
 	if ((file->mode))
-		free(file->mode);
+		ft_strdel(&file->mode);
 	if ((file->path))
-		free(file->path);
+		ft_strdel(&file->path);
 	file->next = NULL;
 	file->sdir = NULL;
 	free(file);
+	file = NULL;
 }
 
 void			ft_free_tfile(t_file *file)
