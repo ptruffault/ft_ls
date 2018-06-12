@@ -106,7 +106,7 @@ t_opts		get_options(int argc, char **argv)
 			while (argv[i][k] != '\0')
 			{
 				if (ft_test_opts(argv[i][k], &opts) == -1)
-					warning("invalid option", argv[i]);
+					warning_c("invalid option", argv[i][k]);
 				k++;
 			}
 		}

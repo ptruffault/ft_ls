@@ -85,7 +85,7 @@ t_file			*ft_search_tfile(char *path, int recursif)
 	file = ft_get_tfile(path, 0);
 	if (!(ret = ft_find(file, name)))
 	{
-		warning("no such file or directory", path);
+		warning("no such file or directory", name);
 		return (NULL);
 	}
 	if (ret->type == 'd')
