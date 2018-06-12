@@ -16,7 +16,7 @@ char		*my_strchr(const char *s, int c)
 {
 	int i;
 
-	i = ft_strlen(s) - 1;
+	i = ft_strlen(s) - 2;
 	while (i >= 0)
 	{
 		if (s[i] == (char)c)
@@ -26,22 +26,24 @@ char		*my_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char		*split_name(char *path)
+static char		*split_name(char **path)
 {
 	char *ptr;
 	char *ret;
 
-	if (((*path == '.' || *path == '/') && *(path + 1) == '\0')
-		|| ft_strequ(path, "..") )
+
+	if (ft_strequ(*path, ".") || ft_strequ(*path, "/") || ft_strequ(*path, ".."))
 		return (ft_strdup("."));
-	if ((ptr = my_strchr(path, '/')))
+	if ((ptr = my_strchr(*path, '/')))
 	{
 		ret = ft_strdup(ptr + 1);
 		*(ptr + 1) = '\0';
 		return (ret);
 	}
-	ret = ft_strdup(path);
-	path = ft_strdup(".");
+	ret = ft_strdup(*path);
+	if (ret[ft_strlen(ret) - 1] == '/')
+		ret[ft_strlen(ret) - 1] = '\0';
+	*path = ft_strdup(".");
 	return (ret);
 }
 
@@ -79,7 +81,7 @@ t_file			*ft_search_tfile(char *path, int recursif)
 	t_file	*ret;
 	char	*name;
 
-	name = split_name(path);
+	name = split_name(&path);
 	file = ft_get_tfile(path, 0);
 	if (!(ret = ft_find(file, name)))
 	{

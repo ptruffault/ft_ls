@@ -20,7 +20,7 @@ static void		ft_disp_l2(t_file *file, t_opts *opts)
 	ft_putchar('\t');
 	if ((opts->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))
 	|| (opts->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
-		error("ft_ls : allocation failed", NULL);
+		error("allocation failed", NULL);
 	else
 	{
 		ft_putstr_color(date, SOULIGNE);
