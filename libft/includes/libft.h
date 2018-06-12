@@ -75,6 +75,8 @@ struct	s_list
 
 void	warning(char *descript, char *opts);
 void	error(char *descript, char *opts);
+void	warning_c(char *descript, char opts);
+void	error_c(char *descript, char opts);
 char 	*ft_arr_to_str(char **arr);
 char 	*ft_char_to_str(char c);
 char 	*ft_itoa_base_intmax(intmax_t value, int base);
