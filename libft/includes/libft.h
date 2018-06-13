@@ -72,7 +72,8 @@ struct	s_list
 	t_list	*next;
 };
 
-
+int		ft_strarrlen(char **arr);
+char 	**ft_strsplit_word(char *str);
 void	warning(char *descript, char *opts);
 void	error(char *descript, char *opts);
 void	warning_c(char *descript, char opts);
@@ -99,12 +100,12 @@ char	*ft_get_prev_path(char *path);
 int		get_next_line(const int fd, char **line);	
 char 	*ft_get_input(void);
 int		ft_strcmp_castless(char *s1, char *s2);
-
-void	ft_freestrarr(char ***arr);
+void	ft_freestrarr(char **arr);
 void	*ft_realloc(void *ptr, size_t prev_size, size_t new_size);
 int		ft_str_startwith(char *s1, char *s2);
 char	**ft_strsplit_whitespace(char *s);
-
+char	*ft_strpull(char *src, char *ptr, int len, char *value);
+char	*ft_strndup(char *src, int len);
 t_list	*ft_lstnew(const void *content, size_t content_size);
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t));

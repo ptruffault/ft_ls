@@ -36,6 +36,7 @@ t_file	*ft_get_tfile(char *path, int recursive)
 	file = ft_new_tfile();
 	if (!(dir = opendir(path)))
 	{
+		ft_putstr("\033[00;31m\033[04mError:\033[00m");
 		perror(path);
 		return (NULL);
 	}

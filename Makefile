@@ -65,3 +65,12 @@ load:
 	@rm -rf *
 	@git clone $(GIT) TMP && mv TMP/* . && rm -rf TMP libft
 	@git clone https://github.com/ptruffault/libft.git
+
+
+build_test:
+	@mkdir test test/dir test/dir/hiden_folders
+	@ln Makefile test/link
+	@chmod 000 test/dir
+	@echo "42" > test/file
+
+
