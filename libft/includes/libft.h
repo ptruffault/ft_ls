@@ -72,6 +72,8 @@ struct	s_list
 	t_list	*next;
 };
 
+void	ft_putchar_color(char c , char *color);
+void	ft_putchar_color_fd(char c , char *color, int fd);
 int		ft_strarrlen(char **arr);
 char 	**ft_strsplit_word(char *str);
 void	warning(char *descript, char *opts);

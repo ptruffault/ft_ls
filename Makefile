@@ -68,9 +68,9 @@ save: fclean
 	@git push
 	@echo "$(DONE)"
 
-load:
+update:
 	@rm -rf *
 	@git clone $(GIT) TMP && mv TMP/* . && rm -rf TMP libft
 	@git clone https://github.com/ptruffault/libft.git
 	
-.PHONY: all cln clean fclean re save load
+.PHONY: all cln clean fclean re save update
