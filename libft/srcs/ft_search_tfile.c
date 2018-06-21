@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-char		*my_strchr(const char *s, int c)
+char			*my_strchr(const char *s, int c)
 {
 	int i;
 
@@ -31,8 +31,8 @@ static char		*split_name(char **path)
 	char *ptr;
 	char *ret;
 
-
-	if (ft_strequ(*path, ".") || ft_strequ(*path, "/") || ft_strequ(*path, ".."))
+	if (ft_strequ(*path, ".") || ft_strequ(*path, "/")
+	|| ft_strequ(*path, ".."))
 		return (ft_strdup("."));
 	if ((ptr = my_strchr(*path, '/')))
 	{

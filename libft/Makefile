@@ -19,10 +19,10 @@ ft_strnequ.c ft_strnew.c ft_strsplit.c ft_strsub.c ft_get_input.c\
 ft_strtrim.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_strsplit_word.c\
 ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_sqrt.c ft_strarrlen.c\
 ft_realloc.c  ft_new_path.c ft_get_tfile.c ft_error.c ft_strndup.c\
-ft_get_file_information.c ft_free_tfile.c ft_new_tfile.c \
+ft_get_file_inf.c  ft_free_tfile.c ft_new_tfile.c ft_itoa_base_uintmax.c \
 ft_putstr_color_fd.c ft_sort_tfile.c ft_freestrarr.c \
 ft_str_startwith.c ft_strsplit_whitespace.c ft_char_to_str.c \
-ft_itoa_base.c ft_stradd_char.c ft_strjoin_fr.c ft_arr_to_str.c \
+ft_itoa_base_intmax.c ft_stradd_char.c ft_strjoin_fr.c \
 
 FLAG = -Wall -Werror -Wextra
 
@@ -37,7 +37,7 @@ OP_COLOR	= \033[1;31m
 DONE 		= $(NO_COLOR)[\033[1;32mOK$(NO_COLOR)]
 
 
-all:  bin $(NAME)
+all:  bin srcs $(NAME)
 
 $(NAME): $(OBJ) 
 	@ar rc $@ $^
@@ -45,6 +45,9 @@ $(NAME): $(OBJ)
 	@echo "$(DONE)$(OP_COLOR)$(NAME)$(NO_COLOR)"
 
 bin:
+	@mkdir $@
+
+srcs:
 	@mkdir $@
 
 bin/%.o: srcs/%.c 
@@ -60,6 +63,8 @@ fclean: clean
 	@echo "$(OP_COLOR)Cleaning (libft/libft.a) $(DONE)"
 	@rm -rf $(NAME)
 
+re: fclean all
+
 chmod:
 	@chmod 777 *
 	@chmod 777 srcs/*
@@ -72,13 +77,11 @@ save: clean fclean
 	@echo "\t$(DONE)"
 
 update:
-	@echo "$(OP_COLOR)download lastest $(NAME) version$(NO_COLOR)"
+	@echo "download lastest $(NAME) version"
 	@clear && rm -rf * && git clone $(GIT) tmpfold
 	@mv tmpfold/* . && rm -rf tmpfold
 
-re: fclean all
-
-.PHONY: all clean fclean re save update
+.PHONY: all clean fclean re chmod save update
 
 
 
