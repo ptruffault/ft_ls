@@ -24,7 +24,6 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 
-
 typedef struct s_opts	t_opts;
 struct	s_opts
 {

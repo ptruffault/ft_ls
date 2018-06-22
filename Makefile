@@ -33,8 +33,8 @@ all: bin $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ./libft/ all
-	@echo "$(COLOR) -Creating $(NAME) \033[00m"
-	@gcc $(FLAGS) $(OBJ) -I ./includes -Llibft/ -lft -o $(NAME)
+	@echo "$(COLOR) -Creating $(NAME)$(NO_COLOR)"
+	@gcc $(FLAGS) $(OBJ) -I ./includes -Llibft -lft -o $(NAME)
 	@echo "$(DONE)"
 
 bin:
@@ -44,15 +44,11 @@ bin/%.o: $(FILES_FOLD)/%.c
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "$(DONE) $(COLOR)$<"
 
-test:
-	@echo "building test folders"
-	@mkdir test test/dir test/dir/hiden_folders
-	@ln -s Makefile test/link
-	@chmod 000 test/dir
-	@echo "42" > test/file
+clear:
+	@clear
 
 cln:
-	@rm -rf $(OBJ)
+	@rm -rf bin/*
 
 clean: cln
 	@make -C libft/ fclean
@@ -60,17 +56,19 @@ clean: cln
 fclean: clean
 	@rm -rf $(NAME)
 
-re:	fclean all
+re:	clear fclean all
 
-save: fclean
+save: clear fclean
 	@git add * srcs/* includes/*
 	@git commit -m  "make save"
 	@git push
 	@echo "$(DONE)"
 
-update:
+update: clear 
 	@rm -rf *
+	@echo "$(COLOR)download $(NAME)$(NO_COLOR)"
 	@git clone $(GIT) TMP && mv TMP/* . && rm -rf TMP libft
+	@echo "$(COLOR)download libft$(NO_COLOR)"
 	@git clone https://github.com/ptruffault/libft.git
 	
 .PHONY: all cln clean fclean re save update

@@ -51,12 +51,11 @@ srcs:
 	@mkdir $@
 
 bin/%.o: srcs/%.c 
-	@cat $< > $<tmp && rm -rf $< && mv $<tmp $< 
 	@gcc $(FLAG) -I includes/ -c $< -o $@
 	@echo "  $(DONE) $(COLOR)$<"
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf bin/*
 	@echo "$(OP_COLOR)Cleaning (libft/*.o)\t $(DONE)"
 
 fclean: clean
