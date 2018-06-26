@@ -33,28 +33,29 @@ all: bin $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ./libft/ all
-	@echo "$(COLOR) -Creating $(NAME)$(NO_COLOR)"
 	@gcc $(FLAGS) $(OBJ) -I ./includes -Llibft -lft -o $(NAME)
-	@echo "$(DONE)"
+	@echo "$(DONE)$(COLOR) -Create $(NAME)$(NO_COLOR)"
 
 bin:
 	@mkdir $@
 
 bin/%.o: $(FILES_FOLD)/%.c 
 	@gcc $(FLAG) -I includes/ -c $< -o $@
-	@echo "$(DONE) $(COLOR)$<"
+	@echo "$(DONE) $(COLOR)$<$(NO_COLOR)"
 
 clear:
 	@clear
 
 cln:
 	@rm -rf bin/*
+	@echo "$(DONE) $(OP_COLOR)Remove bin$(NO_COLOR)"
 
 clean: cln
 	@make -C libft/ fclean
 
 fclean: clean
 	@rm -rf $(NAME)
+	@echo "$(DONE) $(OP_COLOR)Remove $(NAME)$(NO_COLOR)"
 
 re:	clear fclean all
 
