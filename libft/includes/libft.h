@@ -61,6 +61,7 @@ struct	s_file
 	int			block;
 	char		*link;
 	int			total;
+	dev_t		st_rdev;
 	t_file		*sdir;
 	t_file		*next;
 };

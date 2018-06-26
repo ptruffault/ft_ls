@@ -24,6 +24,9 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 
+# define MAJOR(x)((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
+# define MINOR(x)((int32_t)((x) & 0xffffff))
+
 typedef struct s_opts	t_opts;
 struct	s_opts
 {

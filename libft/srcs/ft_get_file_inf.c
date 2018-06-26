@@ -60,8 +60,7 @@ t_file			*ft_get_file_inf(struct dirent *t_dir, char *path)
 	f = ft_new_tfile();
 	if ((!(f->name = ft_strdup(t_dir->d_name))) ||
 	!(f->path = ft_new_path(path, f->name)) ||
-	(lstat(f->path, &buf) < 0) ||
-	((f->type = find_type(buf.st_mode)) == '0') ||
+	(lstat(f->path, &buf) < 0) || ((f->type = find_type(buf.st_mode)) == '0') ||
 	(!(owner = getpwuid(buf.st_uid)) ||
 	!(f->owner = ft_strdup(owner->pw_name))) ||
 	(!(grp = getgrgid(buf.st_gid)) ||
@@ -69,6 +68,7 @@ t_file			*ft_get_file_inf(struct dirent *t_dir, char *path)
 	!(f->mode = find_mode(buf.st_mode)))
 		warning("impossible to take all the file's info", path);
 	f->modif_time = buf.st_mtime;
+	f->st_rdev = buf.st_rdev;
 	f->access_time = buf.st_atime;
 	f->block = (int)buf.st_blocks;
 	f->nb_of_l = buf.st_nlink;

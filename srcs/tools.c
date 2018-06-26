@@ -16,7 +16,14 @@ static void		ft_disp_l2(t_file *file, t_opts *opts)
 {
 	char *date;
 
-	ft_putnbr(file->size);
+	if (file->type == 'c' || file->type == 'b')
+	{
+		ft_putnbr(major(file->st_rdev));
+		ft_putstr(" , ");
+		ft_putnbr(minor((file->st_rdev)));
+	}
+	else
+		ft_putnbr(file->size);
 	ft_putchar('\t');
 	if ((opts->u == 0 && !(date = ft_strsub(ctime(&file->modif_time), 4, 12)))
 	|| (opts->u == 1 && !(date = ft_strsub(ctime(&file->access_time), 4, 12))))
