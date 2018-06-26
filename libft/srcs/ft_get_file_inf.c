@@ -50,12 +50,14 @@ static	char	find_type(mode_t st_mode)
 	return ('0');
 }
 
-void			ft_get_file_inf(t_file *f, struct dirent *t_dir, char *path)
+t_file			*ft_get_file_inf(struct dirent *t_dir, char *path)
 {
 	struct stat		buf;
 	struct group	*grp;
 	struct passwd	*owner;
+	t_file			*f;
 
+	f = ft_new_tfile();
 	if ((!(f->name = ft_strdup(t_dir->d_name))) ||
 	!(f->path = ft_new_path(path, f->name)) ||
 	(lstat(f->path, &buf) < 0) ||
@@ -74,4 +76,5 @@ void			ft_get_file_inf(t_file *f, struct dirent *t_dir, char *path)
 	if (f->type == 'l' && (!(f->link = ft_strnew(BUFF_SIZE)) ||
 		readlink(f->path, f->link, BUFF_SIZE) < 0))
 		warning("impossible to read the link", path);
+	return (f);
 }

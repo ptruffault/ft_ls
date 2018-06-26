@@ -18,9 +18,10 @@ static void	read_all_dir(t_file *f, char *path, DIR *dir, int recursive)
 
 	while ((t_dir = readdir(dir)))
 	{
-		f->next = ft_new_tfile();
-		f = f->next;
-		ft_get_file_inf(f, t_dir, path);
+		if (!(f->next = ft_get_file_inf(t_dir, path)))
+			ft_del_tfile(f->next);
+		else
+			f = f->next;
 		if (recursive != 0 && f->type == 'd' &&
 		ft_strcmp(f->name, ".") != 0 && ft_strcmp(f->name, "..") != 0)
 			f->sdir = ft_get_tfile(f->path, recursive);
@@ -38,6 +39,7 @@ t_file		*ft_get_tfile(char *path, int recursive)
 	{
 		ft_putstr("\033[00;31m\033[04mError:\033[00m");
 		perror(path);
+		free(file);
 		return (NULL);
 	}
 	else if ((path))

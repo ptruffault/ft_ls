@@ -64,22 +64,6 @@ fclean: clean
 
 re: fclean all
 
-chmod:
-	@chmod 777 *
-	@chmod 777 srcs/*
-	@chmod 777 includes/*
-
-save: clean fclean
-	@git add * $(SRCS)
-	@git commit -m "[make save]"
-	@git push
-	@echo "\t$(DONE)"
-
-update:
-	@echo "download lastest $(NAME) version"
-	@clear && rm -rf * && git clone $(GIT) tmpfold
-	@mv tmpfold/* . && rm -rf tmpfold
-
 .PHONY: all clean fclean re chmod save update
 
 
